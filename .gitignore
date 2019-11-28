@@ -1,0 +1,16 @@
+.idea
+*.phar
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
+
+.phpunit
+/phpunit.xml
+
+npm-debug.log
+yarn-error.log
+
+/.env
