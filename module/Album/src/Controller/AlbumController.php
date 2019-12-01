@@ -1,4 +1,12 @@
 <?php
+/**
+ * Controller Class for the Album Model
+ *
+ * This class handles all HTTP requests and Model calls for the 
+ * Album Model.
+ *
+ * @see https://github.com/dreboard/zend
+ */
 namespace Album\Controller;
 
 use Album\Model\AlbumTable;
@@ -7,16 +15,31 @@ use Zend\View\Model\ViewModel;
 use Album\Form\AlbumForm;
 use Album\Model\Album;
 
+/**
+ * Class AlbumController
+ * @package Album\Controller
+ */
 class AlbumController extends AbstractActionController
 {
+    /**
+     * @var AlbumTable
+     */
     private $table;
 
     // Add this constructor:
+
+    /**
+     * AlbumController constructor.
+     * @param AlbumTable $table
+     */
     public function __construct(AlbumTable $table)
     {
         $this->table = $table;
     }
-	
+
+    /**
+     * @return ViewModel
+     */
     public function indexAction()
     {
         return new ViewModel([
@@ -24,6 +47,9 @@ class AlbumController extends AbstractActionController
         ]);
     }
 
+    /**
+     * @return array|\Zend\Http\Response
+     */
     public function addAction()
     {
         $form = new AlbumForm();
@@ -48,6 +74,9 @@ class AlbumController extends AbstractActionController
         return $this->redirect()->toRoute('album');
     }
 
+    /**
+     * @return array|\Zend\Http\Response
+     */
     public function editAction()
     {
         $id = (int) $this->params()->fromRoute('id', 0);
@@ -89,6 +118,9 @@ class AlbumController extends AbstractActionController
         return $this->redirect()->toRoute('album', ['action' => 'index']);
     }
 
+    /**
+     * @return array|\Zend\Http\Response
+     */
     public function deleteAction()
     {
         $id = (int) $this->params()->fromRoute('id', 0);

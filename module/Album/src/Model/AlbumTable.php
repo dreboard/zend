@@ -4,21 +4,39 @@ namespace Album\Model;
 use RuntimeException;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
+/**
+ * Class AlbumTable
+ * @package Album\Model
+ */
 class AlbumTable
 {
+    /**
+     * @var TableGatewayInterface
+     */
     private $tableGateway;
 
+    /**
+     * AlbumTable constructor.
+     * @param TableGatewayInterface $tableGateway
+     */
     public function __construct(TableGatewayInterface $tableGateway)
     {
         $this->tableGateway = $tableGateway;
     }
 
+    /**
+     * @return mixed
+     */
     public function fetchAll()
     {
         return $this->tableGateway->select();
     }
 
-    public function getAlbum($id)
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getAlbum(int $id)
     {
         $id = (int) $id;
         $rowset = $this->tableGateway->select(['id' => $id]);
@@ -33,6 +51,9 @@ class AlbumTable
         return $row;
     }
 
+    /**
+     * @param Album $album
+     */
     public function saveAlbum(Album $album)
     {
         $data = [
@@ -59,6 +80,9 @@ class AlbumTable
         $this->tableGateway->update($data, ['id' => $id]);
     }
 
+    /**
+     * @param $id
+     */
     public function deleteAlbum($id)
     {
         $this->tableGateway->delete(['id' => (int) $id]);
